@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "SearchUsers";
+}
+
+<script src="~/Scripts/jquery-1.9.0.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        //$('#checking').hide();
+
+        $('#b1').click(function () {
+
+            var userName = $('#username').val();
+            //alert("heee");
+            //alert('User Name ='+ userName);
+            //$('#checking').show();
+            $.getJSON("/home/getUsers?username=" + userName, function (data1) {
+                //console.log("123");
+                //alert("heee");
+                //$('#checking').hide();
+                //for(i=0;i<data1.count;i++)
+                //{
+                   //alert("heee");
+                var myOptions =
+                    {
+                        val1: data1.UserId,
+                        val2: data1.CreateDate
+                        //val3: data1.PasswordChangedDate
+                        //val2: data1.CreateDate
+                    };
+                    var $mySelect = $('#s1');
+                    $.each(myOptions, function (val, text)
+                    {
+                        $mySelect.append($('<option />',
+                            {
+                            value: val,
+                            text: text
+                        }));
+                    });
+                    
+                    //var newOption = "<option value='" + "data1[i].UserName" + "'>data[i].UserName</option>";
+                    //$('#s1').append(newOption);
+
+                //}
+                
+            });
+
+        });
+
+    });
+</script>
+<div class="container">
+    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        
+        <input id="username" type="text" class="form-control" name="username" value="" placeholder="username or email">
+        <br />
+        <br />
+
+        <input class="btn btn-sm" type="button" id="b1" value="Search User" />
+
+        <br />
+        <br />
+        <select id="s1">
+            
+        </select>
+
+    
+    </div>
+    </div>
+
